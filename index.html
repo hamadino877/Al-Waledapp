@@ -1,0 +1,341 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  Phone, 
+  MapPin, 
+  Mail, 
+  Menu, 
+  X, 
+  ChevronLeft, 
+  Scissors, 
+  Shirt, 
+  Award, 
+  Star,
+  Zap,
+  ArrowUpRight,
+  MessageCircle,
+  Instagram,
+  Facebook,
+  Twitter
+} from 'lucide-react';
+
+export default function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const categories = [
+    { name: 'فساتين سهرة', img: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=800' },
+    { name: 'كاجوال راقي', img: 'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?q=80&w=800' },
+    { name: 'عبايات مودرن', img: 'https://images.unsplash.com/photo-1563170351-be32388e0c4e?q=80&w=800' },
+    { name: 'ملابس رسمية', img: 'https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?q=80&w=800' }
+  ];
+
+  return (
+    <div dir="rtl" className="font-sans text-[#0B192C] bg-white selection:bg-[#D4AF37] selection:text-white overflow-x-hidden">
+      
+      {/* WhatsApp Floating Button */}
+      <a 
+        href="https://wa.me/201099553770" 
+        target="_blank" 
+        rel="noreferrer"
+        className="fixed bottom-6 left-6 z-[60] bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center"
+      >
+        <MessageCircle size={30} />
+      </a>
+
+      {/* Navigation */}
+      <nav className={`fixed w-full z-[100] transition-all duration-500 ${scrolled ? 'bg-[#0B192C]/95 backdrop-blur-md py-2 shadow-xl' : 'bg-transparent py-6'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center gap-3 group cursor-pointer">
+            <div className="relative flex items-center justify-center w-14 h-14 border-2 border-[#D4AF37] rounded-full group-hover:bg-[#D4AF37] transition-all duration-500">
+              <span className={`font-serif text-2xl font-bold transition-colors ${scrolled || !scrolled ? 'text-[#D4AF37] group-hover:text-[#0B192C]' : 'text-white'}`}>W</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-white text-2xl font-black tracking-tighter leading-none">AL WALEED</span>
+              <span className="text-[#D4AF37] text-[10px] tracking-[0.2em] font-bold uppercase mt-1">Luxury Fashion</span>
+            </div>
+          </div>
+
+          <div className="hidden lg:flex items-center gap-10">
+            {['الرئيسية', 'عن المصنع', 'التشكيلة', 'الجودة', 'تواصل معنا'].map((item) => (
+              <a key={item} href={`#${item}`} className="text-sm font-bold text-white/90 hover:text-[#D4AF37] transition-colors relative group">
+                {item}
+                <span className="absolute -bottom-1 right-0 w-0 h-0.5 bg-[#D4AF37] group-hover:w-full transition-all duration-300"></span>
+              </a>
+            ))}
+            <button className="px-8 py-3 bg-[#D4AF37] text-[#0B192C] font-black rounded-full text-sm hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all transform hover:-translate-y-1">
+              طلب جملة
+            </button>
+          </div>
+
+          <button onClick={() => setIsMenuOpen(true)} className="lg:hidden text-white">
+            <Menu size={32} />
+          </button>
+        </div>
+      </nav>
+
+      {/* Hero Section - High End Style */}
+      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#0B192C]">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2000" 
+            className="w-full h-full object-cover opacity-40 scale-105 animate-[pulse_10s_infinite]"
+            alt="Hero Background"
+          />
+          <div className="absolute inset-0 bg-gradient-to-l from-[#0B192C] via-[#0B192C]/80 to-transparent"></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+          <div className="lg:w-2/3">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 mb-8 animate-bounce">
+              <Star className="text-[#D4AF37]" size={16} fill="#D4AF37" />
+              <span className="text-white text-xs font-bold tracking-widest">رائدو صناعة الملابس في مصر</span>
+            </div>
+            <h1 className="text-5xl lg:text-8xl font-black text-white leading-[1.1] mb-8">
+              نصنع الجمال.. <br/> 
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-yellow-200 underline decoration-[#D4AF37]/30">بكل تفاصيله</span>
+            </h1>
+            <p className="text-xl text-gray-300 mb-10 max-w-xl leading-relaxed font-light">
+              مصنع الوليد ليس مجرد خط إنتاج، بل هو قصة شغف تُحاك في كل خيط. نقدم لتجار الجملة أرقى التصاميم التي تجمع بين الحداثة والأصالة.
+            </p>
+            <div className="flex flex-wrap gap-6">
+              <button className="group relative px-10 py-5 bg-[#D4AF37] text-[#0B192C] font-black rounded-xl overflow-hidden transition-all shadow-2xl">
+                <span className="relative z-10 flex items-center gap-2">
+                  اكتشف كوليكشن 2026
+                  <ArrowUpRight size={20} />
+                </span>
+                <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+              </button>
+              <button className="px-10 py-5 border border-white/30 text-white font-bold rounded-xl hover:bg-white/10 transition-all backdrop-blur-sm">
+                مشاهدة الفيديو التعريفي
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        {/* Animated Scroll Down */}
+        <div className="absolute bottom-10 right-1/2 translate-x-1/2 flex flex-col items-center gap-2 text-white/30 animate-pulse">
+          <span className="text-[10px] uppercase tracking-widest">اسحب للأسفل</span>
+          <div className="w-[1px] h-12 bg-gradient-to-b from-white/50 to-transparent"></div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="relative z-20 -mt-16 max-w-6xl mx-auto px-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-0 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-3xl overflow-hidden border border-gray-100">
+          {[
+            { label: 'قطعة منتجة سنوياً', value: '250k+' },
+            { label: 'عميل جملة في مصر', value: '1,200+' },
+            { label: 'موديل حصري', value: '500+' },
+            { label: 'سنة خبرة', value: '15+' }
+          ].map((stat, i) => (
+            <div key={i} className={`p-8 text-center ${i !== 3 ? 'lg:border-l border-gray-100' : ''}`}>
+              <h4 className="text-3xl font-black text-[#0B192C] mb-1">{stat.value}</h4>
+              <p className="text-gray-400 text-xs font-bold uppercase tracking-tighter">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Categories Grid - High End Interaction */}
+      <section id="التشكيلة" className="py-32 bg-white px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-8">
+            <div className="max-w-2xl">
+              <h2 className="text-[#D4AF37] font-bold text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+                <div className="w-8 h-[2px] bg-[#D4AF37]"></div>
+                أقسام المصنع
+              </h2>
+              <h3 className="text-4xl lg:text-6xl font-black text-[#0B192C] leading-tight">
+                تشكيلات تناسب <br/> تطلعات عملائك
+              </h3>
+            </div>
+            <p className="text-gray-500 lg:w-1/3 text-lg font-light leading-relaxed">
+              نهتم بتنوع الإنتاج لنوفر للتاجر كل ما يحتاجه في مكان واحد، من الملابس اليومية المريحة إلى ملابس السهرات الفخمة.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {categories.map((cat, i) => (
+              <div key={i} className="group relative h-[500px] overflow-hidden rounded-3xl cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-700">
+                <img src={cat.img} className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110" alt={cat.name} />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B192C] via-transparent to-transparent opacity-60 group-hover:opacity-90 transition-opacity"></div>
+                <div className="absolute bottom-0 right-0 p-8 w-full translate-y-4 group-hover:translate-y-0 transition-transform">
+                  <h4 className="text-2xl font-bold text-white mb-2">{cat.name}</h4>
+                  <div className="h-[2px] w-0 group-hover:w-12 bg-[#D4AF37] transition-all duration-500 mb-4"></div>
+                  <p className="text-white/70 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    استكشف أحدث الموديلات لهذا الموسم بدقة تصنيع لا تضاهى.
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process Section - Technical Professionalism */}
+      <section className="py-24 bg-[#0B192C] text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#D4AF37] rounded-full blur-[150px] opacity-10"></div>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-20">
+            <h3 className="text-[#D4AF37] font-bold mb-4 tracking-[0.3em]">QUALITY FIRST</h3>
+            <h2 className="text-4xl lg:text-5xl font-black italic">كيف تخرج قطعة "الوليد" للنور؟</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+            {[
+              { icon: <Zap />, title: 'انتقاء الخامات', desc: 'نتعامل مع كبرى مصانع الغزل والنسيج لضمان خامات لا تتغير مع الزمن.' },
+              { icon: <Scissors />, title: 'دقة الباترون', desc: 'نستخدم تقنيات حديثة في رسم الباترونات لضمان أفضل "تلبيس" مريح للقطعة.' },
+              { icon: <Award />, title: 'مراقبة الجودة', desc: 'كل قطعة تمر بـ 3 مراحل فحص قبل التعبئة النهائية للتأكد من خلوها من العيوب.' }
+            ].map((step, i) => (
+              <div key={i} className="relative group text-center lg:text-right">
+                <div className="mb-8 inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-white/5 border border-white/10 text-[#D4AF37] group-hover:bg-[#D4AF37] group-hover:text-[#0B192C] transition-all duration-500 rotate-3 group-hover:rotate-0">
+                  {step.icon}
+                </div>
+                <h4 className="text-2xl font-bold mb-4">{step.title}</h4>
+                <p className="text-gray-400 leading-relaxed">{step.desc}</p>
+                {i < 2 && <div className="hidden lg:block absolute top-10 -left-8 w-16 h-[1px] bg-white/20"></div>}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Product Highlight */}
+      <section id="الجودة" className="py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            <div className="lg:w-1/2 relative">
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37]/10 rounded-full blur-3xl"></div>
+              <div className="relative rounded-[40px] overflow-hidden shadow-2xl border-8 border-gray-50">
+                 <img src="https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=1000" className="w-full h-[600px] object-cover" alt="Quality Section" />
+              </div>
+              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 max-w-[200px]">
+                <div className="flex text-[#D4AF37] mb-2">
+                  {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#D4AF37" />)}
+                </div>
+                <p className="text-xs font-bold text-[#0B192C]">"أفضل مصنع تعاملنا معه من حيث دقة المقاسات وسرعة التوريد"</p>
+                <p className="text-[10px] text-gray-400 mt-2">— صاحب معرض أزياء</p>
+              </div>
+            </div>
+            
+            <div className="lg:w-1/2">
+              <h2 className="text-[#D4AF37] font-bold text-sm uppercase mb-4">Luxury Finishing</h2>
+              <h3 className="text-4xl lg:text-5xl font-black text-[#0B192C] mb-8 leading-tight">شغفنا هو الكمال في كل غرزة خياطة</h3>
+              <p className="text-gray-500 text-lg mb-8 leading-relaxed">
+                ندرك أن الملابس الجاهزة هي استثمار للتاجر، لذلك نركز على "الفنش" النهائي الذي يجعل القطعة تنافس البراندات العالمية. خيوط متينة، سوست أصلية، وأزرار منتقاة بعناية.
+              </p>
+              <ul className="space-y-4 mb-10">
+                {[
+                  'توصيل سريع لكافة محافظات مصر',
+                  'إمكانية تنفيذ التصاميم الخاصة (Private Label)',
+                  'تحديث دوري للموديلات أسبوعياً',
+                  'أسعار مدروسة جداً لزيادة ربحية التاجر'
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-[#0B192C] font-bold">
+                    <div className="w-6 h-6 rounded-full bg-[#D4AF37]/20 flex items-center justify-center text-[#D4AF37]">
+                      <Zap size={12} />
+                    </div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <a href="#contact" className="inline-block px-12 py-5 bg-[#0B192C] text-white font-bold rounded-xl hover:shadow-2xl transition-all">تواصل مع قسم المبيعات</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer / Contact - Dark Premium */}
+      <footer id="تواصل معنا" className="bg-[#0B192C] pt-32 pb-16 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-24">
+            
+            <div className="lg:col-span-5">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-16 h-16 border-2 border-[#D4AF37] rounded-full flex items-center justify-center">
+                  <span className="text-[#D4AF37] text-3xl font-serif font-bold italic">W</span>
+                </div>
+                <h4 className="text-3xl font-black text-white italic">AL WALEED</h4>
+              </div>
+              <p className="text-gray-400 text-lg leading-relaxed mb-10">
+                نسعى دائماً لنكون الشريك الاستراتيجي الأول لكل تاجر ملابس في الوطن العربي، من خلال تقديم قيمة حقيقية مقابل السعر.
+              </p>
+              <div className="space-y-6">
+                <div className="flex items-center gap-6 group cursor-pointer">
+                  <div className="w-14 h-14 bg-white/5 rounded-full flex items-center justify-center text-[#D4AF37] group-hover:bg-[#D4AF37] group-hover:text-[#0B192C] transition-all">
+                    <Phone size={24} />
+                  </div>
+                  <div>
+                    <span className="block text-gray-500 text-xs uppercase font-bold tracking-widest mb-1">اتصل بنا الآن</span>
+                    <span className="text-xl text-white font-bold tracking-wider">01099553770</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-6 group cursor-pointer">
+                  <div className="w-14 h-14 bg-white/5 rounded-full flex items-center justify-center text-[#D4AF37] group-hover:bg-[#D4AF37] group-hover:text-[#0B192C] transition-all">
+                    <MapPin size={24} />
+                  </div>
+                  <div>
+                    <span className="block text-gray-500 text-xs uppercase font-bold tracking-widest mb-1">موقعنا</span>
+                    <span className="text-xl text-white font-bold">القاهرة، جمهورية مصر العربية</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-7">
+               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-[30px] p-10">
+                  <h5 className="text-2xl font-bold text-white mb-8">استفسار مبيعات الجملة</h5>
+                  <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={e => e.preventDefault()}>
+                    <input className="bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white outline-none focus:border-[#D4AF37] transition-all" placeholder="الاسم بالكامل" />
+                    <input className="bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white outline-none focus:border-[#D4AF37] transition-all" placeholder="رقم الواتساب" />
+                    <input className="bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white outline-none focus:border-[#D4AF37] transition-all" placeholder="اسم المحل / الشركة" />
+                    <input className="bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white outline-none focus:border-[#D4AF37] transition-all" placeholder="المدينة" />
+                    <textarea className="bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white outline-none focus:border-[#D4AF37] transition-all md:col-span-2 h-32" placeholder="بماذا يمكننا مساعدتك؟"></textarea>
+                    <button className="md:col-span-2 py-5 bg-[#D4AF37] text-[#0B192C] font-black rounded-xl hover:shadow-[0_10px_30px_rgba(212,175,55,0.3)] transition-all transform hover:-translate-y-1">
+                      إرسال الطلب الآن
+                    </button>
+                  </form>
+               </div>
+            </div>
+          </div>
+
+          <div className="pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+            <p className="text-gray-500 text-sm">© 2026 AL WALEED FACTORY. All Rights Reserved.</p>
+            <div className="flex gap-4">
+              {[Instagram, Facebook, Twitter].map((Icon, i) => (
+                <a key={i} href="#" className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-gray-400 hover:text-[#D4AF37] hover:bg-white/10 transition-all">
+                  <Icon size={20} />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* Slide Menu Mobile */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-[200] bg-[#0B192C] p-10 animate-in fade-in slide-in-from-right duration-500">
+           <button onClick={() => setIsMenuOpen(false)} className="absolute top-10 left-10 text-white">
+             <X size={40} />
+           </button>
+           <div className="flex flex-col gap-8 mt-20">
+              {['الرئيسية', 'عن المصنع', 'التشكيلة', 'الجودة', 'تواصل معنا'].map((item) => (
+                <a key={item} href="#" className="text-4xl font-black text-white hover:text-[#D4AF37]">{item}</a>
+              ))}
+              <div className="mt-20 pt-10 border-t border-white/10">
+                <p className="text-[#D4AF37] font-bold mb-4">تواصل معنا مباشرة:</p>
+                <p className="text-2xl text-white font-black">01099553770</p>
+              </div>
+           </div>
+        </div>
+      )}
+
+    </div>
+  );
+}
